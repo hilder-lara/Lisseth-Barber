@@ -1,0 +1,13 @@
+{
+  "name": "Lisseth Barber Studio",
+  "short_name": "Lisseth Barber",
+  "description": "Barbería de alta gama liderada por Lisseth — cortes de autor, ritual de barba y experiencias ejecutivas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "icons": [
+    { "src": "favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

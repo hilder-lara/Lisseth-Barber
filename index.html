@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lisseth Barber Studio</title>
+<meta name="description" content="Lisseth Barber Studio: barbería de lujo. Cortes de autor, perfilado y ritual de barba con precisión y visión femenina." />
+<meta name="theme-color" content="#0A0A0A" />
+
+<!-- Favicon (favicon.svg es la fuente vectorial; los PNG son fallback) -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
+<link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<!-- www.lissethbarberstudio.com es un dominio placeholder (mismo usado en el correo de contacto).
+     Actualiza canonical/og:url/og:image y el JSON-LD cuando el sitio tenga dominio real. -->
+<link rel="canonical" href="https://www.lissethbarberstudio.com/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Lisseth Barber Studio" />
+<meta property="og:title" content="Lisseth Barber Studio" />
+<meta property="og:description" content="El arte de la precisión tiene visión femenina." />
+<meta property="og:image" content="https://www.lissethbarberstudio.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://www.lissethbarberstudio.com/" />
+<meta property="og:locale" content="es_PE" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Lisseth Barber Studio" />
+<meta name="twitter:description" content="El arte de la precisión tiene visión femenina. Cortes de autor y ritual de barba premium." />
+<meta name="twitter:image" content="https://www.lissethbarberstudio.com/og-image.png" />
+
+<link rel="stylesheet" href="styles.css" />
+
+<!-- Datos estructurados para resultados enriquecidos en Google (horarios, teléfono, rango de precio). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarberShop",
+  "name": "Lisseth Barber Studio",
+  "image": "https://www.lissethbarberstudio.com/og-image.png",
+  "url": "https://www.lissethbarberstudio.com/",
+  "telephone": "+51939096308",
+  "priceRange": "$$$",
+
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- Textura de grano cinematográfico, puramente decorativa -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- Rastro de tinta dorada que sigue al cursor (solo en dispositivos con mouse) -->
+<canvas id="cursorCanvas" aria-hidden="true"></canvas>
+
+<!-- Intro de carga: se muestra una vez por sesión, se omite con prefers-reduced-motion -->
+<div class="intro-overlay" id="introOverlay" aria-hidden="true">
+  <span class="intro-mark">
+    <svg viewBox="0 0 80 80" aria-hidden="true">
+      <circle cx="40" cy="40" r="35" transform="rotate(-90 40 40)" />
+    </svg>
+    <span class="intro-letter">L</span>
+  </span>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="siteNav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="#top" class="brand" aria-label="Lisseth Barber Studio — inicio">
+        <span class="brand-mark">L</span>
+        <span class="brand-word">LISSETH BARBER STUDIO</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#estudio">Estudio</a>
+        <a href="#experiencias">Experiencias</a>
+        <a href="#lookbook">Lookbook</a>
+        <a href="#testimonios">Testimonios</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <a href="#reservas" class="btn-outline nav-cta">Agendar Cita</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 5H16M2 9H16M2 13H16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#estudio">Estudio</a>
+      <a href="#experiencias">Experiencias</a>
+      <a href="#lookbook">Lookbook</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#reservas" class="btn-outline" style="align-self:flex-start;">Agendar Cita</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <!-- Video de fondo: assets/video/hero-loop.mp4 es un placeholder.
+       Reemplázalo por el metraje real del estudio; mientras tanto,
+       el degradado de .hero-media sirve de respaldo visual. -->
+  <div class="hero-media" aria-hidden="true">
+    <video class="hero-video" data-parallax="0.12" autoplay loop muted playsinline preload="none">
+      <source src="assets/video/hero-loop.mp4" type="video/mp4">
+      <source src="assets/video/hero-loop.webm" type="video/webm">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="wrap">
+    <p class="eyebrow" style="margin-bottom:1.4rem;">Estudio de barbería de autor</p>
+    <div class="hero-grid">
+      <div>
+        <h1 class="hero-headline">
+          El arte de la precisión<br>
+          tiene <span class="hero-underline-wrap"><span class="weight">visión femenina.</span>
+            <svg class="hero-underline" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 14 C 60 4, 100 18, 150 10 S 250 2, 298 12" />
+            </svg>
+          </span>
+        </h1>
+        <p class="hero-sub">Cortes de autor para hombres que no negocian su imagen. Un ojo clínico, formado en cada estilo —del clásico al urbano— y una precisión que solo la mirada de Lisseth logra leer en tu rostro.</p>
+        <div class="hero-cta-row">
+          <a href="#reservas" class="btn-solid magnetic">
+            Reservar mi experiencia
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M12 7L7.5 2.5M12 7L7.5 11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="hero-cta-note">Cita confirmada al instante — cupos limitados por día</span>
+        </div>
+      </div>
+      <div class="hero-marginalia">
+        <div class="marginalia-item">
+          <span class="num">I.</span>
+          <p>Formación clásica europea y dominio de fades urbanos de precisión.</p>
+        </div>
+        <div class="marginalia-item">
+          <span class="num">II.</span>
+          <p>Ritual completo: navaja, toalla caliente, tónicos de grado profesional.</p>
+        </div>
+        <div class="marginalia-item">
+          <span class="num">III.</span>
+          <p>Agenda privada — un cliente, una silla, cero prisa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EL SELLO DE AUTOR ============ -->
+<section class="section" id="estudio">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="manifesto reveal">
+        <p class="eyebrow" style="margin-bottom:1rem;">El sello de autor</p>
+        <h2 class="heading" style="font-size:clamp(1.7rem,3.2vw,2.3rem); font-style:italic; margin-bottom:1.6rem;">Firmo cada corte con la misma exigencia con la que miro un rostro por primera vez.</h2>
+        <p>Entré a este oficio para demostrar algo simple: que la precisión no tiene género, tiene mirada. Años de formación en escuelas clásicas de barbería me dieron el dominio técnico —la navaja, el fade, el diseño de barba— pero fue mi ojo el que aprendió a leer cada rostro antes de tocarlo.</p>
+        <p>No existe "un estilo de la casa". Existe tu estilo, ejecutado con un rigor que no perdona el detalle: la línea que no tiembla, el degradado que no se nota, la barba que respeta la estructura de tu mandíbula.</p>
+        <p>Cada cliente que se sienta en mi silla sale con algo más que un corte: sale con la certeza de que alguien lo miró de verdad.</p>
+        
+        <div class="credentials-accordion">
+          <div class="credential-item">
+            <button class="credential-trigger" aria-expanded="false" aria-controls="cred-a-0" id="cred-q-0">
+              <span class="cred-title">Formación Clásica Europea</span>
+              <span class="cred-indicator"></span>
+            </button>
+            <div class="credential-content" id="cred-a-0" role="region" aria-labelledby="cred-q-0">
+              <p>Especialización en corte tradicional a tijera y afeitado clásico con navaja recta, perfeccionando las técnicas en academias de referencia continental. Respeto absoluto al ritual tradicional en tres tiempos.</p>
+            </div>
+          </div>
+          <div class="credential-item">
+            <button class="credential-trigger" aria-expanded="false" aria-controls="cred-a-1" id="cred-q-1">
+              <span class="cred-title">Mapeo de Visajismo Clínico</span>
+              <span class="cred-indicator"></span>
+            </button>
+            <div class="credential-content" id="cred-a-1" role="region" aria-labelledby="cred-q-1">
+              <p>Estudio analítico de la estructura ósea, ángulos faciales y la dirección del crecimiento capilar de cada cliente. Adaptamos las tendencias para potenciar y estilizar las facciones naturales de tu rostro.</p>
+            </div>
+          </div>
+          <div class="credential-item">
+            <button class="credential-trigger" aria-expanded="false" aria-controls="cred-a-2" id="cred-q-2">
+              <span class="cred-title">Precisión Quirúrgica en Fades</span>
+              <span class="cred-indicator"></span>
+            </button>
+            <div class="credential-content" id="cred-a-2" role="region" aria-labelledby="cred-q-2">
+              <p>Dominio de degradados limpios con transiciones imperceptibles. Diseños de líneas arquitectónicas y terminaciones ultra perfiladas que garantizan durabilidad y nitidez en tu imagen diaria.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="signature">
+          <span class="signature-name-wrap">
+            <span class="signature-name">Lisseth</span>
+            <svg class="signature-underline" viewBox="0 0 140 16" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 10 C 30 2, 55 14, 80 7 S 130 1, 138 9" />
+            </svg>
+          </span>
+          <span class="signature-role">Fundadora &amp; Maestra Barbera</span>
+        </div>
+      </div>
+      <div class="portrait-frame reveal" data-parallax="0.06">
+        <span class="corner c-tl"></span>
+        <span class="corner c-tr"></span>
+        <span class="corner c-bl"></span>
+        <span class="corner c-br"></span>
+        <img class="portrait-img" src="assets/images/lisseth-portrait.webp" alt="Retrato editorial de Lisseth — Fundadora y Maestra Barbera" loading="lazy">
+
+        <span class="portrait-caption">Retrato editorial — Estudio Lisseth</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline wrap" style="max-width:1240px; margin:0 auto;">
+
+<!-- ============ EXPERIENCIAS ============ -->
+<section class="section" id="experiencias">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:0.8rem;">Menú de experiencias</p>
+        <h2>Cada servicio, un ritual completo.</h2>
+      </div>
+      <p class="desc">Precios en tarifa estándar. Ajustables según densidad, largo y complejidad del diseño solicitado.</p>
+    </div>
+
+    <div class="services-grid" id="servicesGrid">
+      <article class="service-card reveal" data-service="Corte de Autor" data-price="$38" data-duration="45 min">
+        <h3 class="service-name">Corte de Autor</h3>
+        <p class="service-desc">Consulta de rostro, corte a tijera y máquina, diseño de línea de precisión y acabado con productos de grado profesional.</p>
+        <div class="service-foot">
+          <div class="service-price-wrap">
+            <span class="service-price">$38</span>
+            <span class="service-duration">45 min</span>
+          </div>
+          <button class="service-book" data-book="Corte de Autor">Reservar →</button>
+        </div>
+      </article>
+      <article class="service-card reveal" data-service="Ritual de Barba con Toalla Caliente" data-price="$32" data-duration="45 min">
+        <h3 class="service-name">Ritual de Barba<br>Toalla Caliente</h3>
+        <p class="service-desc">Vapor caliente, navaja afilada a mano, perfilado de barba y bigote, y tónico calmante post-afeitado.</p>
+        <div class="service-foot">
+          <div class="service-price-wrap">
+            <span class="service-price">$32</span>
+            <span class="service-duration">45 min</span>
+          </div>
+          <button class="service-book" data-book="Ritual de Barba con Toalla Caliente">Reservar →</button>
+        </div>
+      </article>
+      <article class="service-card reveal" data-service="Combo Ejecutivo" data-price="$62" data-duration="60 min">
+        <h3 class="service-name">Combo Ejecutivo</h3>
+        <p class="service-desc">Corte de Autor + Ritual de Barba + masaje capilar. La experiencia completa para quien no tiene tiempo que perder.</p>
+        <div class="service-foot">
+          <div class="service-price-wrap">
+            <span class="service-price">$62</span>
+            <span class="service-duration">60 min</span>
+          </div>
+          <button class="service-book" data-book="Combo Ejecutivo">Reservar →</button>
+        </div>
+      </article>
+      <article class="service-card reveal" data-service="Diseño Urbano" data-price="$40" data-duration="50 min">
+        <h3 class="service-name">Diseño Urbano</h3>
+        <p class="service-desc">Fades de alto contraste y diseños a navaja: líneas arquitectónicas para un estilo urbano contundente.</p>
+        <div class="service-foot">
+          <div class="service-price-wrap">
+            <span class="service-price">$40</span>
+            <span class="service-duration">50 min</span>
+          </div>
+          <button class="service-book" data-book="Diseño Urbano">Reservar →</button>
+        </div>
+      </article>
+      <article class="service-card reveal" data-service="Afeitado Clásico a Navaja" data-price="$35" data-duration="45 min">
+        <h3 class="service-name">Afeitado Clásico<br>a Navaja</h3>
+        <p class="service-desc">Ritual tradicional a navaja recta, toallas calientes en tres tiempos, y aceites pre y post afeitado.</p>
+        <div class="service-foot">
+          <div class="service-price-wrap">
+            <span class="service-price">$35</span>
+            <span class="service-duration">45 min</span>
+          </div>
+          <button class="service-book" data-book="Afeitado Clásico a Navaja">Reservar →</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASESOR DE VISAJISMO ============ -->
+<section class="section" id="visajismo" style="background:var(--bg); border-top:1px solid var(--hairline);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:0.8rem;">Estudio de proporciones</p>
+        <h2>Asesor de Visajismo Interactivo</h2>
+      </div>
+      <p class="desc">Descubre qué corte y estilo de barba potencian mejor las líneas naturales de tu rostro de acuerdo a las reglas de simetría y visajismo.</p>
+    </div>
+
+    <div class="visagismo-container reveal">
+      <div class="visagismo-selector">
+        <button class="vis-btn active" data-face="ovalo">
+          <span class="vis-icon-oval"></span>
+          <span class="vis-label">Óvalo</span>
+        </button>
+        <button class="vis-btn" data-face="cuadrado">
+          <span class="vis-icon-square"></span>
+          <span class="vis-label">Cuadrado</span>
+        </button>
+        <button class="vis-btn" data-face="redondo">
+          <span class="vis-icon-round"></span>
+          <span class="vis-label">Redondo</span>
+        </button>
+        <button class="vis-btn" data-face="diamante">
+          <span class="vis-icon-diamond"></span>
+          <span class="vis-label">Diamante</span>
+        </button>
+        <button class="vis-btn" data-face="corazon">
+          <span class="vis-icon-heart"></span>
+          <span class="vis-label">Corazón</span>
+        </button>
+      </div>
+
+      <div class="visagismo-results" id="visagismoResults">
+        <!-- Oval -->
+        <div class="visagismo-panel active" id="face-ovalo">
+          <div class="visagismo-detail">
+            <h3>Rostro Ovalado</h3>
+            <p class="visagismo-intro">Considerado el canon ideal por su equilibrio simétrico. La frente es ligeramente más ancha que la mandíbula y las curvas son suaves, lo que otorga total versatilidad para experimentar estilos.</p>
+            <div class="visagismo-specs">
+              <div class="spec-block">
+                <h5>Corte de Autor Recomendado</h5>
+                <p>Cortes con flequillo despejado o volumen superior texturizado, como un fade medio o un tupé clásico. La frente despejada ayuda a lucir la perfecta simetría de tus facciones.</p>
+              </div>
+              <div class="spec-block">
+                <h5>Diseño de Barba Recomendado</h5>
+                <p>Cualquier estilo se adapta. Recomendamos una barba de tres días bien delineada o una barba clásica corta para resaltar el contorno de la mandíbula sin sobrecargar el rostro.</p>
+              </div>
+            </div>
+            <div class="visagismo-action">
+              <button class="btn-outline vis-cta-btn" data-preset-service="Combo Ejecutivo" data-preset-face="Ovalado">Agendar con este Diagnóstico →</button>
+            </div>
+          </div>
+          <div class="visagismo-illustration">
+            <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="50" cy="65" rx="30" ry="46" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round"/>
+              <ellipse cx="50" cy="65" rx="30" ry="46" stroke="var(--rose)" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Cuadrado -->
+        <div class="visagismo-panel" id="face-cuadrado">
+          <div class="visagismo-detail">
+            <h3>Rostro Cuadrado</h3>
+            <p class="visagismo-intro">Se distingue por una mandíbula fuerte y angulosa y una frente amplia. El enfoque de Lisseth radica en suavizar sutilmente los ángulos muy duros para estilizar el rostro sin perder la fuerza del semblante.</p>
+            <div class="visagismo-specs">
+              <div class="spec-block">
+                <h5>Corte de Autor Recomendado</h5>
+                <p>Cortes que aporten altura e incluyan volumen superior (como Pompadours o tupés texturizados) con laterales pulidos pero no excesivamente rapados para no ensanchar la sien.</p>
+              </div>
+              <div class="spec-block">
+                <h5>Diseño de Barba Recomendado</h5>
+                <p>Barba con perfilado sutilmente redondeado en las esquinas de la mandíbula o barba de varios días degradada. Ayuda a suavizar los rasgos marcados y estilizar el mentón.</p>
+              </div>
+            </div>
+            <div class="visagismo-action">
+              <button class="btn-outline vis-cta-btn" data-preset-service="Corte de Autor" data-preset-face="Cuadrado">Agendar con este Diagnóstico →</button>
+            </div>
+          </div>
+          <div class="visagismo-illustration">
+            <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="22" y="22" width="56" height="86" rx="8" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="22" y="22" width="56" height="86" rx="8" stroke="var(--rose)" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Redondo -->
+        <div class="visagismo-panel" id="face-redondo">
+          <div class="visagismo-detail">
+            <h3>Rostro Redondo</h3>
+            <p class="visagismo-intro">La longitud y anchura facial son similares, con pómulos prominentes y mandíbula de contornos circulares. El objetivo de visajismo es crear ángulos ópticos para alargar e imprimir mayor definición al rostro.</p>
+            <div class="visagismo-specs">
+              <div class="spec-block">
+                <h5>Corte de Autor Recomendado</h5>
+                <p>Cortes de alto contraste (como Fades altos o Undercuts) con volumen y dirección vertical en la parte superior. Esto rompe la simetría esférica y alarga visualmente la cabeza.</p>
+              </div>
+              <div class="spec-block">
+                <h5>Diseño de Barba Recomendado</h5>
+                <p>Barba tipo candado o barba completa cortada de manera muy lineal y recta en las mejillas, con mayor longitud en el mentón. Alarga y estiliza las facciones.</p>
+              </div>
+            </div>
+            <div class="visagismo-action">
+              <button class="btn-outline vis-cta-btn" data-preset-service="Diseño Urbano" data-preset-face="Redondo">Agendar con este Diagnóstico →</button>
+            </div>
+          </div>
+          <div class="visagismo-illustration">
+            <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="65" r="40" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round"/>
+              <circle cx="50" cy="65" r="40" stroke="var(--rose)" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Diamante -->
+        <div class="visagismo-panel" id="face-diamante">
+          <div class="visagismo-detail">
+            <h3>Rostro Diamante</h3>
+            <p class="visagismo-intro">Presenta pómulos altos y anchos con una frente y mandíbula estrechas. Es una estructura muy angulosa que requiere suavizar la prominencia de las mejillas y dar volumen a la parte inferior.</p>
+            <div class="visagismo-specs">
+              <div class="spec-block">
+                <h5>Corte de Autor Recomendado</h5>
+                <p>Cortes texturizados con volumen medio en los laterales (evitar rapados muy altos) para armonizar los pómulos anchos, y peinados con raya al lado o movimiento.</p>
+              </div>
+              <div class="spec-block">
+                <h5>Diseño de Barba Recomendado</h5>
+                <p>Barba completa y poblada para ensanchar y dar peso visual a la zona de la barbilla estrecha, perfilada de forma horizontal para equilibrar el conjunto.</p>
+              </div>
+            </div>
+            <div class="visagismo-action">
+              <button class="btn-outline vis-cta-btn" data-preset-service="Combo Ejecutivo" data-preset-face="Diamante">Agendar con este Diagnóstico →</button>
+            </div>
+          </div>
+          <div class="visagismo-illustration">
+            <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 20 L 82 65 L 50 110 L 18 65 Z" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M50 20 L 82 65 L 50 110 L 18 65 Z" stroke="var(--rose)" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Corazón -->
+        <div class="visagismo-panel" id="face-corazon">
+          <div class="visagismo-detail">
+            <h3>Rostro Corazón</h3>
+            <p class="visagismo-intro">La frente es la sección más ancha del rostro y los pómulos son marcados, estrechándose progresivamente hasta una barbilla fina y puntiaguda. Buscamos balancear la anchura de la frente y rellenar la mandíbula.</p>
+            <div class="visagismo-specs">
+              <div class="spec-block">
+                <h5>Corte de Autor Recomendado</h5>
+                <p>Cortes con caída natural de cabello a los lados de la frente (flequillos desordenados o medias melenas texturizadas) para restar protagonismo al ancho superior.</p>
+              </div>
+              <div class="spec-block">
+                <h5>Diseño de Barba Recomendado</h5>
+                <p>Barba completa poblada de varios días o de longitud media. Aumenta la robustez de la zona del mentón contrarrestando la barbilla en punta.</p>
+              </div>
+            </div>
+            <div class="visagismo-action">
+              <button class="btn-outline vis-cta-btn" data-preset-service="Ritual de Barba con Toalla Caliente" data-preset-face="Corazón">Agendar con este Diagnóstico →</button>
+            </div>
+          </div>
+          <div class="visagismo-illustration">
+            <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 108 C 28 82, 20 62, 20 44 C 20 28, 34 18, 50 36 C 66 18, 80 28, 80 44 C 80 62, 72 82, 50 108 Z" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M50 108 C 28 82, 20 62, 20 44 C 20 28, 34 18, 50 36 C 66 18, 80 28, 80 44 C 80 62, 72 82, 50 108 Z" stroke="var(--rose)" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOOKBOOK ============ -->
+<section class="section" id="lookbook" style="background:var(--surface); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:0.8rem;">Lookbook</p>
+        <h2>Hoja de contactos del estudio.</h2>
+      </div>
+      <p class="desc">Filtra por estilo para ver el criterio aplicado en cada categoría.</p>
+    </div>
+
+    <p class="compare-caption">Referencia ilustrativa de estilo — no es la transformación de un mismo cliente.</p>
+    <div class="compare reveal" id="compareSlider">
+      <div class="compare-media compare-before">
+        <img src="assets/images/compare-before.webp" alt="Estilo sin arreglar, referencia de punto de partida" loading="lazy" draggable="false">
+        <span class="compare-label">Antes</span>
+      </div>
+      <div class="compare-media compare-after">
+        <img src="assets/images/compare-after.webp" alt="Fade de contraste terminado" loading="lazy" draggable="false">
+        <span class="compare-label">Después — Diseño Urbano</span>
+      </div>
+      <div class="compare-handle" role="slider" aria-label="Deslizar para comparar antes y después" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+        <span class="compare-handle-grip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M8 6L2 12L8 18M16 6L22 12L16 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="todos">Todos</button>
+      <button class="filter-btn" data-filter="clasicos">Clásicos</button>
+      <button class="filter-btn" data-filter="urbanos">Urbanos</button>
+      <button class="filter-btn" data-filter="barba">Barba</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid"><!-- filled by main.js --></div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="section" id="testimonios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:0.8rem;">Prueba social</p>
+        <h2>Lo que dicen al salir de la silla.</h2>
+      </div>
+      <div class="google-badge-wrap">
+        <div class="google-logo-row">
+          <svg width="15" height="15" viewBox="0 0 24 24"><path fill="var(--gold)" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.137 4.114-3.416 0-6.196-2.78-6.196-6.196s2.78-6.196 6.196-6.196c1.556 0 2.978.583 4.07 1.545l3.057-3.057C19.123 2.197 15.938 1 12.24 1 5.922 1 1 5.922 1 12.24s4.922 11.24 11.24 11.24c6.333 0 11.455-5.122 11.455-11.455 0-.67-.06-1.32-.174-1.954l-11.281.014z"/></svg>
+          <span class="google-title">Google Business</span>
+        </div>
+        <div class="google-rating-row">
+          <span class="rating-num">4.9</span>
+          <span class="stars">★★★★★</span>
+          <span class="reviews-count">Verificado (186 opiniones)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid" id="reviewsGrid">
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-quote">"Primera vez que un corte me deja exactamente como pedí. Lisseth tiene un ojo increíble para la proporción."</p>
+        <div class="review-who"><span class="review-name">Carlos M.</span><span class="review-badge">Google · verificado</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-quote">"El ritual de barba con toalla caliente es otro nivel. Salgo de ahí sintiéndome nuevo."</p>
+        <div class="review-who"><span class="review-name">Andrés R.</span><span class="review-badge">Google · verificado</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-quote">"Ambiente serio, atención impecable, cero prisa. Vale cada peso."</p>
+        <div class="review-who"><span class="review-name">Diego F.</span><span class="review-badge">Google · verificado</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-quote">"Le pedí un fade urbano difícil de ejecutar y lo clavó a la primera."</p>
+        <div class="review-who"><span class="review-name">Javier T.</span><span class="review-badge">Google · verificado</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-quote">"Es la única barbería donde confío sin tener que explicar mucho. Ella ya sabe leer lo que necesito."</p>
+        <div class="review-who"><span class="review-name">Miguel A.</span><span class="review-badge">Google · verificado</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-quote">"Combo ejecutivo antes de una reunión importante. Cambié mi rutina por completo."</p>
+        <div class="review-who"><span class="review-name">Roberto S.</span><span class="review-badge">Google · verificado</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESERVAS ============ -->
+<section class="section" id="reservas" style="background:var(--surface); border-top:1px solid var(--hairline);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:0.8rem;">Reserva tu cita</p>
+        <h2>Elige tu experiencia, día y hora.</h2>
+      </div>
+      <p class="desc">Simulador de agenda — confirma en tres pasos y ábrelo por WhatsApp.</p>
+    </div>
+
+    <div class="booking-panel reveal">
+      <div class="booking-step">
+        <div class="step-label"><span class="step-no">01</span><span class="step-text">Selecciona tu experiencia</span></div>
+        <div class="chip-row" id="serviceChips"><!-- filled by main.js --></div>
+      </div>
+      <hr class="hairline" style="margin-bottom:2.6rem;">
+      <div class="booking-step">
+        <div class="step-label"><span class="step-no">02</span><span class="step-text">Elige un día</span></div>
+        <div class="chip-row" id="dayChips"><!-- filled by main.js --></div>
+      </div>
+      <hr class="hairline" style="margin-bottom:2.6rem;">
+      <div class="booking-step">
+        <div class="step-label"><span class="step-no">03</span><span class="step-text">Elige una hora disponible</span></div>
+        <div class="time-grid" id="timeGrid">
+          <span style="color:var(--muted); font-size:0.82rem;">Selecciona un día para ver los horarios disponibles.</span>
+        </div>
+      </div>
+
+      <div class="booking-summary">
+        <p class="summary-line" id="summaryLine">Aún no has seleccionado experiencia, día ni hora.</p>
+        <button class="confirm-btn magnetic" id="confirmBtn" disabled>Confirmar Cita</button>
+      </div>
+
+      <div class="confirmation" id="confirmation">
+        <span class="cmark">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9.5L7 13.5L15 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <h4>Cita confirmada</h4>
+          <p id="confirmationText"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREGUNTAS FRECUENTES ============ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:0.8rem;">Preguntas frecuentes</p>
+        <h2>Todo lo que necesitas saber antes de sentarte en la silla.</h2>
+      </div>
+      <p class="desc">¿Alguna otra duda? Escríbenos por WhatsApp.</p>
+    </div>
+
+    <div class="faq-list" id="faqList">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-0" id="faq-q-0">
+          <span>¿Por qué elegir un estudio liderado por una mujer?</span>
+          <span class="faq-icon"><span class="bar bar-h"></span><span class="bar bar-v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-0" role="region" aria-labelledby="faq-q-0">
+          <p>Lisseth aporta un ojo clínico, detallista y una visión vanguardista al estilismo masculino. Nos enfocamos en la simetría facial, la pulcritud y en asesorarte para encontrar el estilo exacto que potencie tu imagen, rompiendo con los cortes genéricos de las barberías tradicionales.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1">
+          <span>¿Qué tipos de estilos dominan en el estudio?</span>
+          <span class="faq-icon"><span class="bar bar-h"></span><span class="bar bar-v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
+          <p>Absolutamente todos. Desde degradados urbanos de alta complejidad (fades, diseños freestyle) hasta cortes clásicos, ejecutivos de negocios y rituales tradicionales de barba con toalla caliente y navaja libre.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2">
+          <span>¿Es necesario agendar una cita previa?</span>
+          <span class="faq-icon"><span class="bar bar-h"></span><span class="bar bar-v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
+          <p>Sí, para garantizarte una experiencia de lujo sin esperas y con la atención 100% personalizada de Lisseth, trabajamos exclusivamente bajo agenda previa a través de nuestra plataforma web.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3">
+          <span>¿Cuánto tiempo dura cada servicio de autor?</span>
+          <span class="faq-icon"><span class="bar bar-h"></span><span class="bar bar-v"></span></span>
+        </button>
+        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
+          <p>Cada sesión se toma con la seriedad que merece, durando entre 45 y 60 minutos según la complejidad del servicio y el ritual seleccionado. Aquí no trabajamos al apuro; esculpimos cada detalle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark">L</span>
+          <span class="brand-word">LISSETH BARBER STUDIO</span>
+        </div>
+        <p class="footer-tagline">El arte de la precisión.</p>
+        <p class="footer-desc">Barbería de autor para hombres que entienden que la imagen es una decisión, no un accidente.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M14 3v10.6a3.4 3.4 0 11-2.8-3.35" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M14 3c.3 2.6 2 4.6 4.5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Horarios de atención</h5>
+        <div class="hours-row"><span>Lunes a viernes</span><span>9:00 AM – 8:00 PM</span></div>
+        <div class="hours-row"><span>Sábados</span><span>9:00 AM – 7:00 PM</span></div>
+        <div class="hours-row"><span>Domingos</span><span>Cerrado</span></div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <a href="https://wa.me/51939096308" target="_blank" rel="noopener">+51 939 096 308 · WhatsApp</a>
+        <a href="mailto:contacto@lissethbarberstudio.com">contacto@lissethbarberstudio.com</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Navegación</h5>
+        <a href="#top">Inicio</a>
+        <a href="#experiencias">Servicios</a>
+        <a href="#lookbook">Lookbook</a>
+        <a href="#reservas" class="footer-nav-cta magnetic">Reservar Ahora</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Lisseth Barber Studio. Todos los derechos reservados.</span>
+      <a href="#">Políticas de Privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
